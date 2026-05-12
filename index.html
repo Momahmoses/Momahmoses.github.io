@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="MOMAH MOSES .C. — Geospatial AI Engineer & Data Scientist building data-driven systems for Africa's development challenges." />
+  <meta property="og:title" content="MOMAH MOSES .C. | Geospatial AI Engineer" />
+  <meta property="og:description" content="10 live GIS dashboards, healthcare AI, and MLOps systems solving Africa's most critical challenges." />
+  <meta property="og:url" content="https://momahmoses.github.io" />
+  <title>MOMAH MOSES .C. | Geospatial AI Engineer & Data Scientist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #080c14;
+      --bg2:      #0d1321;
+      --bg3:      #111827;
+      --accent:   #00d4aa;
+      --accent2:  #0078d4;
+      --text:     #f1f5f9;
+      --muted:    #94a3b8;
+      --border:   rgba(255,255,255,.07);
+      --card:     rgba(255,255,255,.04);
+      --radius:   14px;
+      --shadow:   0 4px 32px rgba(0,0,0,.5);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(8,12,20,.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 clamp(20px,5vw,80px);
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: 'Fira Code', monospace;
+      font-weight: 500; font-size: 1rem;
+      color: var(--accent); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: .9rem; font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      background: var(--accent); color: #080c14 !important;
+      padding: 8px 20px; border-radius: 8px;
+      font-weight: 600 !important; transition: opacity .2s !important;
+    }
+    .nav-cta:hover { opacity: .85; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 100px clamp(20px,8vw,140px) 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 70% 40%, rgba(0,212,170,.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(0,120,212,.07) 0%, transparent 70%);
+    }
+    .grid-bg {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 700px; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,212,170,.1); border: 1px solid rgba(0,212,170,.25);
+      color: var(--accent); padding: 6px 16px; border-radius: 100px;
+      font-size: .82rem; font-weight: 500; margin-bottom: 28px;
+      font-family: 'Fira Code', monospace;
+    }
+    .hero-tag::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.8)} }
+
+    .hero-name {
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -.02em;
+      background: linear-gradient(135deg, #fff 30%, var(--accent) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+    .hero-role {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      color: var(--muted); font-weight: 400; margin-bottom: 24px;
+    }
+    .hero-role span { color: var(--text); font-weight: 600; }
+    .hero-desc {
+      font-size: 1.05rem; color: var(--muted);
+      max-width: 540px; margin-bottom: 40px; line-height: 1.8;
+    }
+    .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px; border-radius: 10px;
+      font-weight: 600; font-size: .95rem;
+      text-decoration: none; transition: all .2s; cursor: pointer; border: none;
+    }
+    .btn-primary {
+      background: var(--accent); color: #080c14;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,212,170,.35); }
+    .btn-outline {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    .hero-stats {
+      display: flex; gap: 40px; flex-wrap: wrap;
+      margin-top: 56px; padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+    .stat-num { font-size: 2rem; font-weight: 800; color: var(--accent); line-height: 1; }
+    .stat-label { font-size: .82rem; color: var(--muted); margin-top: 4px; }
+
+    /* ── SECTIONS ── */
+    section { padding: 100px clamp(20px,8vw,140px); }
+    .section-label {
+      font-family: 'Fira Code', monospace;
+      font-size: .8rem; color: var(--accent);
+      letter-spacing: .15em; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800; letter-spacing: -.02em;
+      margin-bottom: 16px;
+    }
+    .section-sub { color: var(--muted); font-size: 1.05rem; max-width: 560px; }
+
+    /* ── ABOUT ── */
+    #about { background: var(--bg2); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center; margin-top: 56px;
+    }
+    .about-text p { color: var(--muted); margin-bottom: 20px; line-height: 1.9; }
+    .about-text p strong { color: var(--text); }
+    .about-highlights {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+      margin-top: 8px;
+    }
+    .highlight-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+      transition: border-color .2s;
+    }
+    .highlight-card:hover { border-color: rgba(0,212,170,.3); }
+    .highlight-icon { font-size: 1.6rem; margin-bottom: 10px; }
+    .highlight-title { font-weight: 600; font-size: .95rem; margin-bottom: 4px; }
+    .highlight-desc { font-size: .82rem; color: var(--muted); }
+
+    /* ── STACK ── */
+    #stack { background: var(--bg); }
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px; margin-top: 48px;
+    }
+    .stack-item {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px 16px;
+      display: flex; align-items: center; gap: 10px;
+      font-size: .88rem; font-weight: 500;
+      transition: all .2s; cursor: default;
+    }
+    .stack-item:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .stack-item i { width: 18px; text-align: center; }
+    .stack-category { margin-top: 40px; margin-bottom: 16px; }
+    .stack-category-title {
+      font-size: .78rem; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--bg2); }
+    .projects-header { margin-bottom: 56px; }
+    .featured-banner {
+      background: linear-gradient(135deg, rgba(0,212,170,.1) 0%, rgba(0,120,212,.08) 100%);
+      border: 1px solid rgba(0,212,170,.2);
+      border-radius: var(--radius); padding: 32px 40px;
+      margin-bottom: 40px;
+      display: flex; align-items: center; justify-content: space-between; gap: 32px;
+      flex-wrap: wrap;
+    }
+    .featured-banner-text h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; }
+    .featured-banner-text p { color: var(--muted); font-size: .95rem; max-width: 500px; }
+    .dashboard-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px; margin-top: 24px;
+    }
+    .dash-card {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px 20px;
+      display: flex; align-items: center; gap: 14px;
+      text-decoration: none; color: var(--text);
+      transition: all .2s;
+    }
+    .dash-card:hover { border-color: var(--accent); transform: translateX(4px); }
+    .dash-icon { font-size: 1.5rem; min-width: 32px; }
+    .dash-name { font-weight: 600; font-size: .9rem; }
+    .dash-domain { font-size: .78rem; color: var(--muted); }
+
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px; margin-top: 40px;
+    }
+    .project-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px;
+      display: flex; flex-direction: column; gap: 14px;
+      transition: all .25s;
+    }
+    .project-card:hover { border-color: rgba(0,212,170,.3); transform: translateY(-4px); box-shadow: var(--shadow); }
+    .project-card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .project-emoji { font-size: 1.8rem; }
+    .project-links { display: flex; gap: 10px; }
+    .project-links a { color: var(--muted); text-decoration: none; font-size: .95rem; transition: color .2s; }
+    .project-links a:hover { color: var(--accent); }
+    .project-title { font-size: 1.05rem; font-weight: 700; }
+    .project-desc { font-size: .88rem; color: var(--muted); line-height: 1.7; flex: 1; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      background: rgba(0,212,170,.08); color: var(--accent);
+      border: 1px solid rgba(0,212,170,.18);
+      font-size: .73rem; font-weight: 500;
+      padding: 3px 10px; border-radius: 100px;
+      font-family: 'Fira Code', monospace;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--bg);
+      text-align: center;
+    }
+    .contact-card {
+      max-width: 640px; margin: 48px auto 0;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 48px;
+    }
+    .contact-card p { color: var(--muted); margin-bottom: 36px; font-size: 1.05rem; line-height: 1.8; }
+    .contact-links {
+      display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 36px;
+    }
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 22px; border-radius: 10px;
+      text-decoration: none; font-weight: 600; font-size: .9rem;
+      border: 1px solid var(--border); color: var(--text);
+      transition: all .2s;
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .contact-email {
+      font-family: 'Fira Code', monospace;
+      color: var(--accent); font-size: .95rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px clamp(20px,8vw,140px);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+      font-size: .85rem; color: var(--muted);
+    }
+    .footer-right { display: flex; gap: 24px; }
+    .footer-right a { color: var(--muted); text-decoration: none; transition: color .2s; }
+    .footer-right a:hover { color: var(--accent); }
+
+    /* ── SCROLL ANIMATION ── */
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-highlights { grid-template-columns: 1fr; }
+      .featured-banner { flex-direction: column; }
+      .contact-card { padding: 32px 24px; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">moses.dev</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="grid-bg"></div>
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span>Available for Research &amp; Collaboration</span>
+    </div>
+    <h1 class="hero-name">MOMAH MOSES .C.</h1>
+    <p class="hero-role">
+      <span>Geospatial AI Engineer</span> &amp; Data Scientist
+    </p>
+    <p class="hero-desc">
+      Building production-ready machine learning systems and geospatial intelligence platforms
+      that address Africa's most critical development challenges —
+      from flood early warning to epidemic surveillance.
+    </p>
+    <div class="hero-buttons">
+      <a href="https://momahmoses-ng-gis-portfolio.hf.space" target="_blank" class="btn btn-primary">
+        <i class="fas fa-globe"></i> View Live Portfolio
+      </a>
+      <a href="https://github.com/Momahmoses" target="_blank" class="btn btn-outline">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">10</div>
+        <div class="stat-label">Live GIS Dashboards</div>
+      </div>
+      <div>
+        <div class="stat-num">58+</div>
+        <div class="stat-label">Public Repositories</div>
+      </div>
+      <div>
+        <div class="stat-num">36</div>
+        <div class="stat-label">Nigerian States Covered</div>
+      </div>
+      <div>
+        <div class="stat-num">774</div>
+        <div class="stat-label">LGAs in WASH Analysis</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">// about me</div>
+  <h2 class="section-title">Turning Data into<br/>Development Impact</h2>
+  <div class="about-grid">
+    <div class="about-text fade-up">
+      <p>
+        I am a <strong>Geospatial AI Engineer and Data Scientist</strong> based in Lagos, Nigeria,
+        specialising in production-ready ML systems and spatial intelligence platforms
+        that directly address Africa's development gaps.
+      </p>
+      <p>
+        My work covers the full data-to-decision pipeline — satellite imagery ingestion,
+        <strong>PySpark ETL on Azure Databricks</strong>, spatial analysis with
+        <strong>GeoPandas and Folium</strong>, through to deployed Streamlit dashboards
+        used by planners and policymakers.
+      </p>
+      <p>
+        I am particularly focused on applications in <strong>public health, climate resilience,
+        food security, and urban development</strong> — domains where better data infrastructure
+        can save lives and direct billions in investment more effectively.
+      </p>
+      <a href="https://github.com/Momahmoses" target="_blank" class="btn btn-outline" style="margin-top:8px; display:inline-flex;">
+        <i class="fab fa-github"></i> View All Projects
+      </a>
+    </div>
+    <div class="about-highlights fade-up">
+      <div class="highlight-card">
+        <div class="highlight-icon">🛰️</div>
+        <div class="highlight-title">Geospatial AI</div>
+        <div class="highlight-desc">GIS risk mapping, KDE hotspot analysis, satellite NDVI time series across 36 states</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">🏥</div>
+        <div class="highlight-title">Healthcare AI</div>
+        <div class="highlight-desc">Federated learning, edge diagnostics, maternal mortality risk scoring with SHAP</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">⚙️</div>
+        <div class="highlight-title">MLOps</div>
+        <div class="highlight-desc">FastAPI microservices, MLflow, drift monitoring, shadow deployment, auto-rollback</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">💳</div>
+        <div class="highlight-title">FinTech & Risk</div>
+        <div class="highlight-desc">Credit scoring, fraud detection, causal inference for pricing optimisation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section id="stack">
+  <div class="section-label">// tech stack</div>
+  <h2 class="section-title">Tools &amp; Technologies</h2>
+  <p class="section-sub">End-to-end capability from raw data ingestion to deployed, monitored production systems.</p>
+
+  <div class="stack-category fade-up">
+    <div class="stack-category-title">Languages</div>
+    <div class="stack-grid" style="margin-top:12px;">
+      <div class="stack-item"><i class="fab fa-python" style="color:#3776AB"></i> Python</div>
+      <div class="stack-item"><i class="fas fa-database" style="color:#4479A1"></i> SQL</div>
+      <div class="stack-item"><i class="fab fa-js" style="color:#F7DF1E"></i> JavaScript</div>
+      <div class="stack-item"><i class="fas fa-terminal" style="color:#4EAA25"></i> Bash</div>
+    </div>
+  </div>
+
+  <div class="stack-category fade-up">
+    <div class="stack-category-title">Machine Learning & AI</div>
+    <div class="stack-grid" style="margin-top:12px;">
+      <div class="stack-item">🔬 Scikit-learn</div>
+      <div class="stack-item">⚡ XGBoost</div>
+      <div class="stack-item">🔥 PyTorch</div>
+      <div class="stack-item">🎯 YOLOv8</div>
+      <div class="stack-item">💡 LightGBM</div>
+      <div class="stack-item">🔍 SHAP</div>
+      <div class="stack-item">🤗 HuggingFace</div>
+      <div class="stack-item">📊 MLflow</div>
+    </div>
+  </div>
+
+  <div class="stack-category fade-up">
+    <div class="stack-category-title">Geospatial</div>
+    <div class="stack-grid" style="margin-top:12px;">
+      <div class="stack-item">🗺️ GeoPandas</div>
+      <div class="stack-item">🌿 Folium</div>
+      <div class="stack-item">📐 Shapely</div>
+      <div class="stack-item">🛰️ Rasterio</div>
+      <div class="stack-item">🌍 GDAL</div>
+      <div class="stack-item">📡 Sentinel-2</div>
+    </div>
+  </div>
+
+  <div class="stack-category fade-up">
+    <div class="stack-category-title">Cloud, Big Data & MLOps</div>
+    <div class="stack-grid" style="margin-top:12px;">
+      <div class="stack-item"><i class="fab fa-microsoft" style="color:#0078D4"></i> Azure</div>
+      <div class="stack-item">⚡ PySpark</div>
+      <div class="stack-item">🧱 Databricks</div>
+      <div class="stack-item"><i class="fab fa-docker" style="color:#2496ED"></i> Docker</div>
+      <div class="stack-item">🚀 FastAPI</div>
+      <div class="stack-item">📈 Streamlit</div>
+      <div class="stack-item">📊 Plotly</div>
+      <div class="stack-item">🐼 Pandas</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="projects-header">
+    <div class="section-label">// featured work</div>
+    <h2 class="section-title">Projects &amp; Systems</h2>
+    <p class="section-sub">Production-grade platforms solving real problems across Nigeria and Africa.</p>
+  </div>
+
+  <!-- GIS Portfolio Banner -->
+  <div class="featured-banner fade-up">
+    <div class="featured-banner-text">
+      <h3>🌍 Nigeria GIS Intelligence Portfolio</h3>
+      <p>10 live geospatial dashboards covering flood risk, epidemic surveillance, conflict intelligence,
+      agricultural yield, power grid, and urban planning — all deployed on HuggingFace Spaces.</p>
+    </div>
+    <a href="https://momahmoses-ng-gis-portfolio.hf.space" target="_blank" class="btn btn-primary" style="white-space:nowrap;">
+      <i class="fas fa-external-link-alt"></i> Open Portfolio
+    </a>
+  </div>
+
+  <div class="dashboard-grid fade-up">
+    <a href="https://momahmoses-ng-gis-portfolio.hf.space" target="_blank" class="dash-card">
+      <span class="dash-icon">🌊</span>
+      <div><div class="dash-name">Flood Risk Early Warning System</div><div class="dash-domain">Climate &amp; Disaster</div></div>
+    </a>
+    <a href="https://momahmoses-ng-gis-portfolio.hf.space" target="_blank" class="dash-card">
+      <span class="dash-icon">🏥</span>
+      <div><div class="dash-name">Healthcare Access Gap Analyzer</div><div class="dash-domain">Public Health</div></div>
+    </a>
+    <a href="https://momahmoses-ng-gis-portfolio.hf.space" target="_blank" class="dash-card">
+      <span class="dash-icon">🌾</span>
+      <div><div class="dash-name">Agricultural Yield Predictor</div><div class="dash-domain">Food Security</div></div>
+    </a>
+    <a href="https://momahmoses-ng-gis-portfolio.hf.space" target="_blank" class="dash-card">
+      <span class="dash-icon">🚦</span>
+      <div><div class="dash-name">Traffic Congestion Intelligence</div><div class="dash-domain">Urban Mobility · Lagos</div></div>
+    </a>
+    <a href="https://momahmoses-ng-gis-portfolio.hf.space" target="_blank" class="dash-card">
+      <span class="dash-icon">⚡</span>
+      <div><div class="dash-name">Power Grid Outage Intelligence</div><div class="dash-domain">Energy Infrastructure</div></div>
+    </a>
+    <a href="https://momahmoses-ng-gis-portfolio.hf.space" target="_blank" class="dash-card">
+      <span class="dash-icon">💧</span>
+      <div><div class="dash-name">WASH Access Monitor — 774 LGAs</div><div class="dash-domain">Water &amp; Sanitation</div></div>
+    </a>
+    <a href="https://momahmoses-ng-gis-portfolio.hf.space" target="_blank" class="dash-card">
+      <span class="dash-icon">🌳</span>
+      <div><div class="dash-name">Deforestation &amp; Land Monitor</div><div class="dash-domain">Environment</div></div>
+    </a>
+    <a href="https://momahmoses-ng-gis-portfolio.hf.space" target="_blank" class="dash-card">
+      <span class="dash-icon">🦟</span>
+      <div><div class="dash-name">Disease Surveillance Tracker</div><div class="dash-domain">Epidemiology</div></div>
+    </a>
+    <a href="https://momahmoses-ng-gis-portfolio.hf.space" target="_blank" class="dash-card">
+      <span class="dash-icon">⚠️</span>
+      <div><div class="dash-name">Conflict &amp; Security Analyzer</div><div class="dash-domain">Peace &amp; Security</div></div>
+    </a>
+    <a href="https://momahmoses-ng-gis-portfolio.hf.space" target="_blank" class="dash-card">
+      <span class="dash-icon">🏙️</span>
+      <div><div class="dash-name">Urban Infrastructure Planner</div><div class="dash-domain">Urban Development</div></div>
+    </a>
+  </div>
+
+  <!-- Other Projects -->
+  <div class="projects-grid" style="margin-top:56px;">
+    <div class="project-card fade-up">
+      <div class="project-card-header">
+        <span class="project-emoji">🔬</span>
+        <div class="project-links">
+          <a href="https://github.com/Momahmoses/federated-cancer-detection-africa" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <div class="project-title">Federated Cancer Detection — Africa</div>
+      <div class="project-desc">Privacy-preserving cancer detection across 6 African hospitals. Patient data never leaves the institution — trained via federated learning with differential privacy.</div>
+      <div class="project-tags">
+        <span class="tag">Federated Learning</span>
+        <span class="tag">PyTorch</span>
+        <span class="tag">Healthcare AI</span>
+        <span class="tag">Africa</span>
+      </div>
+    </div>
+    <div class="project-card fade-up">
+      <div class="project-card-header">
+        <span class="project-emoji">🦟</span>
+        <div class="project-links">
+          <a href="https://github.com/Momahmoses/malaria-parasite-detection" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <div class="project-title">Malaria Parasite Detection</div>
+      <div class="project-desc">YOLOv8 blood smear analysis delivering 45-second malaria diagnosis at 97% accuracy — deployable on Raspberry Pi edge devices in resource-constrained clinics.</div>
+      <div class="project-tags">
+        <span class="tag">YOLOv8</span>
+        <span class="tag">Edge AI</span>
+        <span class="tag">OpenCV</span>
+        <span class="tag">Raspberry Pi</span>
+      </div>
+    </div>
+    <div class="project-card fade-up">
+      <div class="project-card-header">
+        <span class="project-emoji">🏥</span>
+        <div class="project-links">
+          <a href="https://github.com/Momahmoses/nigeria-maternal-mortality-prediction" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <div class="project-title">Maternal Mortality Risk Scoring</div>
+      <div class="project-desc">XGBoost + SHAP risk scoring for Nigerian PHCs with a DHIS2-compatible REST API and automated SMS alerts for community health workers.</div>
+      <div class="project-tags">
+        <span class="tag">XGBoost</span>
+        <span class="tag">SHAP</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">Public Health</span>
+      </div>
+    </div>
+    <div class="project-card fade-up">
+      <div class="project-card-header">
+        <span class="project-emoji">🛡️</span>
+        <div class="project-links">
+          <a href="https://github.com/Momahmoses/fraud-detection-mlops" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <div class="project-title">Self-Healing Fraud Detection MLOps</div>
+      <div class="project-desc">Production fraud detection pipeline with FastAPI, MLflow experiment tracking, real-time drift monitoring, shadow deployment, and automatic model rollback.</div>
+      <div class="project-tags">
+        <span class="tag">MLflow</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">Docker</span>
+        <span class="tag">Drift Detection</span>
+      </div>
+    </div>
+    <div class="project-card fade-up">
+      <div class="project-card-header">
+        <span class="project-emoji">💳</span>
+        <div class="project-links">
+          <a href="https://github.com/Momahmoses/sme-loan-default-prediction" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <div class="project-title">SME Loan Default Prediction</div>
+      <div class="project-desc">ML ensemble predicting loan defaults for African microfinance banks, with SHAP explainability dashboards designed for non-technical loan officers.</div>
+      <div class="project-tags">
+        <span class="tag">XGBoost</span>
+        <span class="tag">SHAP</span>
+        <span class="tag">Credit Risk</span>
+        <span class="tag">FinTech</span>
+      </div>
+    </div>
+    <div class="project-card fade-up">
+      <div class="project-card-header">
+        <span class="project-emoji">🌿</span>
+        <div class="project-links">
+          <a href="https://github.com/Momahmoses/crop-disease-detection-africa" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <div class="project-title">Crop Disease Detection — Africa</div>
+      <div class="project-desc">Mobile-ready AI delivering 45-second crop disease diagnosis with treatment advice in Hausa, Yoruba, and Igbo — serving smallholder farmers across West Africa.</div>
+      <div class="project-tags">
+        <span class="tag">TensorFlow</span>
+        <span class="tag">Mobile AI</span>
+        <span class="tag">Hausa</span>
+        <span class="tag">Yoruba</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">// get in touch</div>
+  <h2 class="section-title">Let's Work Together</h2>
+  <div class="contact-card fade-up">
+    <p>
+      I am open to <strong>research collaborations</strong>, <strong>consulting engagements</strong>,
+      and <strong>open-source contributions</strong> in geospatial AI, public health data science,
+      and climate-resilient technology for Africa. Based in Lagos, available globally for remote work.
+    </p>
+    <div class="contact-links">
+      <a href="https://github.com/Momahmoses" target="_blank" class="contact-link">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+      <a href="https://huggingface.co/Momahmoses" target="_blank" class="contact-link">
+        🤗 HuggingFace
+      </a>
+      <a href="https://momahmoses-ng-gis-portfolio.hf.space" target="_blank" class="contact-link">
+        <i class="fas fa-globe"></i> Live Portfolio
+      </a>
+    </div>
+    <div class="contact-email">
+      <i class="fas fa-envelope" style="color:var(--muted);margin-right:8px;"></i>momahmoses@gmail.com
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 MOMAH MOSES .C. · Lagos, Nigeria</span>
+  <div class="footer-right">
+    <a href="https://github.com/Momahmoses" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+    <a href="https://huggingface.co/Momahmoses" target="_blank">🤗 HuggingFace</a>
+    <a href="mailto:momahmoses@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll-based fade-up animation
+  const observer = new IntersectionObserver(
+    (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.12 }
+  );
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Active nav highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+    });
+  }, { passive: true });
+</script>
+</body>
+</html>
