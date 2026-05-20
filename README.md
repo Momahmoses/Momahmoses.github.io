@@ -1,4 +1,4 @@
-# Momah Moses — Personal Portfolio
+# Momah Moses Personal Portfolio
 
 [![HTML](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)](https://momahmoses.github.io)
 [![CSS](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)](https://momahmoses.github.io)
@@ -42,7 +42,7 @@ Personal portfolio website for **Momah Moses** — Geospatial AI Engineer & Data
 |-------|-----------|
 | Markup | HTML5 |
 | Styling | CSS3 (custom properties, flexbox, grid, clamp) |
-| Fonts | Google Fonts — Inter + Fira Code |
+| Fonts | Google Fonts Inter + Fira Code |
 | Icons | Font Awesome 6.5 |
 | Hosting | GitHub Pages |
 
